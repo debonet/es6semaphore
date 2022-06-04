@@ -16,8 +16,8 @@ be limited.
 
 ## TYPICAL USAGE 
 
-```wait()``` and ```signal()``` have the typical Semaphore semantics
-and can be used as ```Promises``` or with ```async/await``` syntax, e.g.:
+`wait()` and `signal()` have the typical Semaphore semantics
+and can be used as `Promises` or with `async/await` syntax, e.g.:
 
 ```
 const sem = new Semaphore(2);
@@ -71,9 +71,9 @@ Sometimes it's useful to wait on the semaphore without claiming
 a resource. A series of functions are available for various tests
 
 ```when( test )```
-```whenall()```
-```whennone()```
-```whenany()```
+```whenAll()```
+```whenNone()```
+```whenAny()```
 
 for example:
 
@@ -85,7 +85,7 @@ f('d');
 console.log("all have been queued");
 await sem.when(c => c==1 );
 console.log("one is available");
-await sem.whenall();
+await sem.whenAll();
 console.log("all are available");
 ```
 
@@ -217,7 +217,7 @@ sem.release( 3 );
 
 ## APPENDIX
 
-definition of ```sleep()``` used in the example above
+definition of `sleep()` used in the example above
 
 ```javascript
 	function sleep( dtm ){

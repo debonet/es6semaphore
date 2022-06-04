@@ -106,8 +106,8 @@ will produce:
 
 ### Semaphore.prototype.wait( d = 1 )
 ### Semaphore.prototype.get( d = 1 )
-### Semaphore.prototype.lock( d = 1)
-### Semaphore.prototype.fpGet( d = 1)
+### Semaphore.prototype.lock( d = 1 )
+### Semaphore.prototype.fpGet( d = 1 )
 
 Waits until the indicated number of resources are available, 
 and then claims them before resolving
@@ -128,7 +128,7 @@ or with Promise chains:
  
 ### Semaphore.prototype.signal( d = 1 )
 ### Semaphore.prototype.release( d = 1 )
-### Semaphore.prototype.unlock( d = 1)
+### Semaphore.prototype.unlock( d = 1 )
 ### Semaphore.prototype.fpRelease( d = 1 )
 
 Releases control over the indicated number of semaphore resources allowing the next tasks waiting for control to proceed.

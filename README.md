@@ -100,14 +100,14 @@ will produce:
 > all are available<br/>
 
 
-# API
+# Semaphore member functions
 
 ## typical semaphore functions
 
-### `Semaphore.prototype.wait( d = 1 )`
-### `Semaphore.prototype.get( d = 1 )`
-### `Semaphore.prototype.lock( d = 1 )`
-### `Semaphore.prototype.fpGet( d = 1 )`
+### `wait( d = 1 )`
+### `get( d = 1 )`
+### `lock( d = 1 )`
+### `fpGet( d = 1 )`
 
 Waits until the indicated number of resources are available, 
 and then claims them before resolving
@@ -126,10 +126,10 @@ or with Promise chains:
  sem.wait().then( /* do whatever */ );
 ```
  
-### `Semaphore.prototype.signal( d = 1 )`
-### `Semaphore.prototype.release( d = 1 )`
-### `Semaphore.prototype.unlock( d = 1 )`
-### `Semaphore.prototype.fpRelease( d = 1 )`
+### `signal( d = 1 )`
+### `release( d = 1 )`
+### `unlock( d = 1 )`
+### `fpRelease( d = 1 )`
 
 Releases control over the indicated number of semaphore resources allowing the next tasks waiting for control to proceed.
 
@@ -142,13 +142,13 @@ sem.signal( );
 
 ## Resource count functions
 
-### `Semaphore.prototype.remaining( )`
-### `Semaphore.prototype.fcRemaining( )`
+### `remaining( )`
+### `fcRemaining( )`
 
 the number of resources remaining
 
-### `Semaphore.prototype.available( )`
-### `Semaphore.prototype.fcAvailable( )`
+### `available( )`
+### `fcAvailable( )`
 
 the total number of resources available
 
@@ -158,8 +158,8 @@ the total number of resources available
 
 these functions allow events to await some semaphore condition before proceeding. All work with `async/await` or as `Promises`
 
-### `Semaphore.prototype.whenAny( )`
-### `Semaphore.prototype.fpWhenAny( )`
+### `whenAny( )`
+### `fpWhenAny( )`
 
 Proceeds when any of the resources remain unused (i.e. `when remaining() > 0`)
 
@@ -168,8 +168,8 @@ Example:
 sem.whenAny().then( /* do something */)
 ```
 
-### `Semaphore.prototype.whenAll( )`
-### `Semaphore.prototype.fpWhenAll( )`
+### `whenAll( )`
+### `fpWhenAll( )`
 
 Proceeds when all of the resources are unused (i.e. when `remaining() == available()` )
 
@@ -179,8 +179,8 @@ await sem.whenAll();
 // do something 
 ```
 
-### `Semaphore.prototype.whenNone( )`
-### `Semaphore.prototype.fpWhenNone( )`
+### `whenNone( )`
+### `fpWhenNone( )`
 
 Proceeds when none of the resources remain ununsed (i.e. when all have been used, `remaining() == 0`) 
 
@@ -190,9 +190,9 @@ Proceeds when none of the resources remain ununsed (i.e. when all have been used
 
 these methods allow for generalized tests, and claim amounts 
 
-### `Semaphore.prototype.when( test = (remaining, available) => remaining > 0 )`
-### `Semaphore.prototype.check( test = (remaining, available) => remaining > 0 )`
-### `Semaphore.prototype.fpWhen( test = (remaining, available) => remaining > 0 )`
+### `when( test = (remaining, available) => remaining > 0 )`
+### `check( test = (remaining, available) => remaining > 0 )`
+### `fpWhen( test = (remaining, available) => remaining > 0 )`
 
 Proceeds when the provided test function evaluates to true given the number of resources that are currently remaining and the available number of resources
 
@@ -201,8 +201,8 @@ Proceeds when the provided test function evaluates to true given the number of r
 sem.when( c => c == 3);
 // do whatever 
 ```
-### `Semaphore.prototype.getWhen( requested, test = (remaining, requested, available) => remaining >= requested )`
-### `Semaphore.prototype.fpGetWhen( requested, test = (remaining, requested, available) => remaining >= requested )`
+### `getWhen( requested, test = (remaining, requested, available) => remaining >= requested )`
+### `fpGetWhen( requested, test = (remaining, requested, available) => remaining >= requested )`
 
 Claims the indicated number of resources requested when the provided test function evaluates to true.
 

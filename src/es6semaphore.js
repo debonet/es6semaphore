@@ -50,6 +50,13 @@ module.exports = class Semaphore {
 	check = this.fpWhen;
 
 	// ----------------------------------------------------
+	fpWhenAny(){
+		return this.fpGetWhen( 0, ( c, d, cAny ) => { return c > 0; });
+	}
+	whenAny = this.fpWhenAny;
+	checkAny = this.fpWhenAny;
+
+	// ----------------------------------------------------
 	fpWhenAll(){
 		return this.fpGetWhen( 0, ( c, d, cAll ) => { return c == cAll; });
 	}

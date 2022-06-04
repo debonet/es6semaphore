@@ -102,7 +102,7 @@ will produce:
 
 # API
 
-## Class API
+## typical semaphore functions
 
 ### Semaphore.prototype.wait( d = 1 )
 ### Semaphore.prototype.get( d = 1 )
@@ -140,6 +140,55 @@ await sem.wait( );
 sem.signal( );
 ```
 
+## Resource count functions
+
+### Semaphore.prototype.remaining( )
+### Semaphore.prototype.fcRemaining( )
+
+the number of resources remaining
+
+### Semaphore.prototype.available( )
+### Semaphore.prototype.fcAvailable( )
+
+the total number of resources available
+
+
+
+## Non-claming resources waiting functions
+
+these functions allow events to await some semaphore condition before proceeding. All work with `async/await` or as `Promises`
+
+### Semaphore.prototype.whenAny( )
+### Semaphore.prototype.fpWhenAny( )
+
+Proceeds when any of the resources remain unused (i.e. `when remaining() > 0`)
+
+Example:
+```javascript
+sem.whenAny().then( /* do something */)
+```
+
+### Semaphore.prototype.whenAll( )
+### Semaphore.prototype.fpWhenAll( )
+
+Proceeds when all of the resources are unused (i.e. when `remaining() == available()` )
+
+Example:
+```javascript
+await sem.whenAll();
+// do something 
+```
+
+### Semaphore.prototype.whenNone( )
+### Semaphore.prototype.fpWhenNone( )
+
+Proceeds when none of the resources remain ununsed (i.e. when all have been used, `remaining() == 0`) 
+
+
+
+## Advanced conditions
+
+these methods allow for generalized tests, and claim amounts 
 
 ### Semaphore.prototype.when( test = (remaining, available) => remaining > 0 )
 ### Semaphore.prototype.check( test = (remaining, available) => remaining > 0 )
@@ -152,41 +201,17 @@ Proceeds when the provided test function evaluates to true given the number of r
 sem.when( c => c == 3);
 // do whatever 
 ```
+### Semaphore.prototype.getWhen( requested, test = (remaining, requested, available) => remaining >= requested )
+### Semaphore.prototype.fpGetWhen( requested, test = (remaining, requested, available) => remaining >= requested )
 
-
-### Semaphore.prototype.getWhen( get, test = (remaining, available) => remaining > get )
-### Semaphore.prototype.fpGetWhen( get, test = (remaining, available) => remaining > get )
-
-Claims the indicated number of resources to get when the provided test function evaluates to true, given the number of resources that are currently remaining and the available number of resources
+Claims the indicated number of resources requested when the provided test function evaluates to true.
 
 ```javascript
-// wait for three resources to be remaining and get them
-sem.getWhen( 3, c => c == 3 );
+// wait for there to be at least two more resources than the 3 we're requesting
+sem.getWhen( 3, (remaining, requested, available) => remaining > requested + 2 )
 // do whatever
 sem.release( 3 );
 ```
-
-### Semaphore.prototype.whenAll( )
-### Semaphore.prototype.fpWhenAll( )
-
-Proceeds when all of the resources are remaining
-
-
-### Semaphore.prototype.whenNone( )
-### Semaphore.prototype.fpWhenNone( )
-
-Proceeds when none of the resources are remaining (i.e. when all have been claimed) 
-
-
-### Semaphore.prototype.remaining( )
-### Semaphore.prototype.fcRemaining( )
-
-the number of resources remaining
-
-### Semaphore.prototype.available( )
-### Semaphore.prototype.fcAvailable( )
-
-the total number of resources available
 
 
 

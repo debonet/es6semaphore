@@ -1,6 +1,6 @@
 {
   "name": "@debonet/es6semaphore",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple, clean, Promise-based Semaphore library and class",
   "main": "src/es6semaphore.js",
   "scripts": {

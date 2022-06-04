@@ -3,7 +3,7 @@
 Simple, dependency-free Semaphore tools for ES6.
 
 ## INSTALLATION
-p
+
 ```
 npm install @debonet/es6semaphore
 ```
@@ -58,10 +58,10 @@ f('d');
 ```
 
 and generate an output somthing like:
-> Here with a at 1005
-> Here with b at 1005
-> Here with c at 2007
-> Here widh d at 2008
+> Here with a at 1005<br/>
+> Here with b at 1005<br/>
+> Here with c at 2007<br/>
+> Here widh d at 2008<br/>
 
 
 
@@ -91,13 +91,13 @@ console.log("all are available");
 
 will produce:
 
-> all have been queued
-> Here with a at 1005
-> Here with b at 1005
-> Here with c at 2007
-> one is available
-> Here widh d at 2008
-> all are available
+> all have been queued<br/>
+> Here with a at 1005<br/>
+> Here with b at 1005<br/>
+> Here with c at 2007<br/>
+> one is available<br/>
+> Here widh d at 2008<br/>
+> all are available<br/>
 
 
 # API

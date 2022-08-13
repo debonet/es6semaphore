@@ -32,7 +32,6 @@ class Semaphore {
 			f();
 		});
 	}
-	getWhen = this.fpGetWhen;
 
 	// ----------------------------------------------------
 	fpGet( d = 1 ) {
@@ -86,6 +85,8 @@ class Semaphore {
 Semaphore.prototype.lock = Semaphore.prototype.fpGet;
 Semaphore.prototype.get = Semaphore.prototype.fpGet;
 Semaphore.prototype.wait = Semaphore.prototype.fpGet;
+
+Semaphore.prototype.getWhen = Semaphore.prototype.fpGetWhen;
 
 Semaphore.prototype.when = Semaphore.prototype.fpWhen;
 Semaphore.prototype.check = Semaphore.prototype.fpWhen;

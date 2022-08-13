@@ -1,4 +1,4 @@
-module.exports = class Semaphore {
+class Semaphore {
 	// ----------------------------------------------------
 	// private members
 	#c = 0;
@@ -38,49 +38,36 @@ module.exports = class Semaphore {
 	fpGet( d = 1 ) {
 		return this.fpGetWhen( d, ( c, d ) => c >= d );
 	}
-	lock = this.fpGet;
-	get = this.fpGet;
-	wait = this.fpGet;
 	
 	// ----------------------------------------------------
 	fpWhen( fb = ( c, cAll ) => { return c >= 0; } ) {
 		return this.fpGetWhen( 0, (c,d,cAll)=>fb(c,cAll) );
 	}
-	when = this.fpWhen;
-	check = this.fpWhen;
 
 	// ----------------------------------------------------
 	fpWhenAny(){
 		return this.fpGetWhen( 0, ( c, d, cAny ) => { return c > 0; });
 	}
-	whenAny = this.fpWhenAny;
-	checkAny = this.fpWhenAny;
 
 	// ----------------------------------------------------
 	fpWhenAll(){
 		return this.fpGetWhen( 0, ( c, d, cAll ) => { return c == cAll; });
 	}
-	whenAll = this.fpWhenAll;
-	checkAll = this.fpWhenAll;
 
 	// ----------------------------------------------------
 	fpWhenNone() {
 		return this.fpGetWhen( 0, ( c ) => { return c == 0; } );
 	}
-	whenNone = this.fpWhenNone;
-	checkNone = this.fpWhenNone;
 
 	// ----------------------------------------------------
 	fcRemaining(){
 		return this.#c;
 	}
-	remaining = this.#c;
 	
 	// ----------------------------------------------------
 	fcAvailable(){
 		return this.#cAll;
 	}
-	all = this.fcAll;
 	
 	// ----------------------------------------------------
 	// signal / release
@@ -92,9 +79,34 @@ module.exports = class Semaphore {
 			f();
 		}
 	}
-	release = this.fRelease;
-	unlock = this.fRelease;
-	signal = this.fRelease;
-
 }
 
+
+// aliases
+Semaphore.prototype.lock = Semaphore.prototype.fpGet;
+Semaphore.prototype.get = Semaphore.prototype.fpGet;
+Semaphore.prototype.wait = Semaphore.prototype.fpGet;
+
+Semaphore.prototype.when = Semaphore.prototype.fpWhen;
+Semaphore.prototype.check = Semaphore.prototype.fpWhen;
+
+Semaphore.prototype.whenAny = Semaphore.prototype.fpWhenAny;
+Semaphore.prototype.checkAny = Semaphore.prototype.fpWhenAny;
+
+Semaphore.prototype.whenAll = Semaphore.prototype.fpWhenAll;
+Semaphore.prototype.checkAll = Semaphore.prototype.fpWhenAll;
+
+Semaphore.prototype.whenNone = Semaphore.prototype.fpWhenNone;
+Semaphore.prototype.checkNone = Semaphore.prototype.fpWhenNone;
+
+Semaphore.prototype.remaining = Semaphore.prototype.fcRemaining;
+
+Semaphore.prototype.all = Semaphore.prototype.fcAll;
+
+Semaphore.prototype.release = Semaphore.prototype.fRelease;
+Semaphore.prototype.unlock = Semaphore.prototype.fRelease;
+Semaphore.prototype.signal = Semaphore.prototype.fRelease;
+
+
+
+module.exports = Semaphore;

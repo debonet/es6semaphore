@@ -215,6 +215,23 @@ sem.release( 3 );
 
 
 
+## Re-Configuring
+
+With care, an existing semaphore can be reconfigured using the following methods. In particular, no guarantees are made to ensure that release() is not called too many times in the case that the available number of resources is reduced, or the remaining number of resources is increased.
+
+### `setAvailable( available )`
+### `fSetAvailable( available )`
+
+Resets the total available resources. Checks to see if the new configuration releases any waiting promises
+
+
+### `setRemaining( remaining )`
+### `fSetRemaining( remaining )`
+
+Resets the total remaining resources. Checks to see if the new configuration releases any waiting promises
+
+
+
 ## APPENDIX
 
 definition of `sleep()` used in the example above

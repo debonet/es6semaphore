@@ -67,6 +67,17 @@ class Semaphore {
 	fcAvailable(){
 		return this.#cAll;
 	}
+	// ----------------------------------------------------
+	fSetRemaining( c ){
+		this.#c = c;
+		this.fRelease( 0 );
+	}
+	
+	// ----------------------------------------------------
+	fSetAvailable( c ){
+		this.#cAll = c;
+		this.fRelease( 0 );
+	}
 	
 	// ----------------------------------------------------
 	// signal / release
@@ -101,8 +112,12 @@ Semaphore.prototype.whenNone = Semaphore.prototype.fpWhenNone;
 Semaphore.prototype.checkNone = Semaphore.prototype.fpWhenNone;
 
 Semaphore.prototype.remaining = Semaphore.prototype.fcRemaining;
-
+Semaphore.prototype.available = Semaphore.prototype.fcAll;
 Semaphore.prototype.all = Semaphore.prototype.fcAll;
+
+Semaphore.prototype.setRemaining = Semaphore.prototype.fSetRemaining;
+Semaphore.prototype.setAvailable = Semaphore.prototype.fSetAvailable;
+Semaphore.prototype.setAll = Semaphore.prototype.fSetAll;
 
 Semaphore.prototype.release = Semaphore.prototype.fRelease;
 Semaphore.prototype.unlock = Semaphore.prototype.fRelease;

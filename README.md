@@ -1,4 +1,4 @@
-# es6mutex.js
+# es6semaphore.js
 
 Simple, dependency-free Semaphore tools for ES6.
 
